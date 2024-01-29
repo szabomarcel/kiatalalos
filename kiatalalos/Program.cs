@@ -5,20 +5,14 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using static kiatalalos.Kitalalos;
 
 namespace kiatalalos
 {
     internal class Program
     {
-
-        public struct jegyrekord
-        {
-            public string rejtettszo;
-            public string tipp;
-            public string valasz;
-        }
         static int tippeles = 0;
-        static jegyrekord[] tejtettszavak = new jegyrekord[2000];
+        static szavak[] rejtettszavak = new szavak[100];
         static void Main(string[] args)
         {
             feladat1();
@@ -30,29 +24,45 @@ namespace kiatalalos
 
         private static void feladat4()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("\n4.Feladat");
+            Console.WriteLine("Kérem írja be a stopot ha szeretné: ");
+            string tipp =Console.ReadLine();
+            if (tipp.ToLower() == "stop")
+            {
+                break;
+            }
+            else
+            {
+                tippSzam++;
+            }
         }
 
-        private static void feladat3()
+        private static void feladat3(string rejtettszo, string tipp)
         {
-            Console.WriteLine("3. Feladat:");
-            for (int i = 0; i < tippeles; i++)
+            Console.WriteLine("\n3. Feladat:");
+            string eredmeny = "";
+            for (int i = 0; i < rejtettszo.Length; i++)
             {
-                for (int j = 0; j < 3; j++)
+                if (rejtettszo[i] == tipp[i])
                 {
-                    Console.WriteLine("3 tippeléssel sikerült kitalálni");
-                }               
+                    eredmeny += rejtettszo[i];
+                }
+                else
+                {
+                    eredmeny += ".";
+                }
             }
         }
 
         private static void feladat2()
         {
-            Console.WriteLine("2. Feladat:");
+            Console.WriteLine("\n2. Feladat:");
             Console.WriteLine("Az eredmény: {0} {1} {2} {3} {4} {5} {6}", tippeles);
         }
 
         private static void feladat1()
         {
+            List<string> szavak = new List<string> {"fuvola", "csirke", "adatok", "asztal", "fogoly", "bicska", "farkas", "almafa", "babona", "gerinc", "dervis", "bagoly", "ecetes", "angyal", "boglya" };
             FileStream sr = new FileStream("szavak.txt", FileMode.Open);
             Console.WriteLine("1. Feladat: ");
             Console.WriteLine();
@@ -60,7 +70,15 @@ namespace kiatalalos
             while (!beolvas.EndOfStream)
             {
                 string[] valaszt = beolvas.ReadLine().Split(' ');
-                
+                if(tippeles < rejtettszavak.Length)
+                {
+                    rejtettszavak[tippeles] = valaszt[0];
+                    tippeles++;
+                }
+                else
+                {
+                    break;
+                }
             }
             beolvas.Close();
             sr.Close();
