@@ -62,7 +62,6 @@ namespace kiatalalos
 
         private static void feladat1()
         {
-            List<string> szavak = new List<string> {"fuvola", "csirke", "adatok", "asztal", "fogoly", "bicska", "farkas", "almafa", "babona", "gerinc", "dervis", "bagoly", "ecetes", "angyal", "boglya" };
             FileStream sr = new FileStream("szavak.txt", FileMode.Open);
             Console.WriteLine("1. Feladat: ");
             Console.WriteLine();
